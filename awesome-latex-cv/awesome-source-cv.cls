@@ -48,7 +48,7 @@
 
 % Dependences
 %A Few Useful Packages
-\RequirePackage[frenchb]{babel}
+
 \RequirePackage[utf8]{luainputenc}
 \RequirePackage{fontspec} 					                 % for loading fonts
 \RequirePackage{url,parskip} 	    % other packages for formatting
@@ -66,7 +66,7 @@
 \RequirePackage[skins]{tcolorbox}
 \RequirePackage{ragged2e}
 \usepackage{tabularx}
-
+\usepackage[french,english]{babel}
 
 \DeclareUnicodeCharacter{00E9}{\'{e}}
 % Define default accent colors

@@ -1,0 +1,114 @@
+% Standard LaTeX Resume Template
+% Based on awesome-cv but simplified for pdflatex compatibility
+
+\documentclass[11pt,a4paper]{article}
+
+% Essential packages
+\usepackage[margin=0.6in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+
+% List formatting
+\setlist[itemize]{noitemsep, topsep=2pt, leftmargin=1.2em}
+
+% Section formatting
+\titleformat{\section}{\large\bfseries}{}{0pt}{}[\titlerule]
+
+% Helper commands
+\newcommand{\resumeItem}[2]{\item \textbf{#1:} #2}
+\newcommand{\resumeBullet}[1]{\item #1}
+
+% Color definitions
+\definecolor{accentcolor}{HTML}{000066}
+
+\begin{document}
+
+% Header
+\begin{center}
+{\LARGE \textbf{Anurag Tiwari}} \\
+Bengaluru, India \,|\, \href{mailto:anuragmtiwari@outlook.com}{anuragmtiwari@outlook.com} \,|\, +91-7678537602 \,|\, 
+\href{https://github.com/iotbyanurag}{github.com/iotbyanurag} \,|\, 
+\href{https://linkedin.com/in/anurag0079090}{linkedin.com/in/anurag0079090}
+\end{center}
+
+% Summary
+\section*{Summary}
+Principle-level Embedded Software Engineer (10+ yrs) specializing in \textbf{Yocto BSPs}, \textbf{Xilinx Zynq (PS)}, 
+\textbf{Embedded Linux}, and \textbf{device drivers} (incl. \textbf{MIPI CSI-2} camera). Built and containerized \textbf{Cloud RAN} 
+apps (Docker/Kubernetes), automated validation (\textbf{Robot Framework}, Jenkins), and delivered 
+production-grade firmware/services with strong DT\&E discipline. Recent work at \textbf{CommScope} spans 
+RAN managers (DM/AM/PFM), microservices (gRPC), and Kafka-backed logging—\textbf{improving test coverage 
+and release velocity}.
+
+% Skills
+\section*{Skills}
+\textbf{Low-Level \& Drivers:} Linux device drivers, MIPI CSI-2 camera pipeline, V4L2, I2C/SPI/UART, DMA, IRQs, GPIO, pinmux \\
+\textbf{Kernel \& BSP/Yocto:} Yocto (distro layers, recipes, images), U-Boot, initramfs, systemd, kernel config/patches \\
+\textbf{Board Bring-Up \& Debug:} Xilinx Zynq(PS), boot flow, DDR, clocks, PMIC, JTAG, logic analyzer, oscilloscope \\
+\textbf{RAN \& Cloud-Native:} C/C++, gRPC, Kafka, Docker, Kubernetes, microservices, CI/CD, observability \\
+\textbf{Tooling \& Automation:} Robot Framework, Jenkins, Git, JIRA, DOORS, Enterprise Architect \\
+\textbf{Languages:} C, C++, Embedded C, Python, Shell; Web (React, Node.js) where relevant
+
+% Experience
+\section*{Experience}
+\textbf{Research \& Development Engineer II} \hfill Jan 2022 -- Present \\
+CommScope, Bengaluru
+\begin{itemize}
+  \resumeBullet{Owned Yocto BSP and image customization for Cloud RAN appliances; streamlined layer hygiene and CI, reducing image build time by \textbf{22\%} and field rollouts by \textbf{$\sim$1 day/release}.}
+  \resumeBullet{Implemented PS-side drivers and user-space control paths (I2C/SPI, DMA, IRQ) for radio subsystems; cut bring-up defects by \textbf{30\%}.}
+  \resumeBullet{Developed MIPI CSI-2 camera capture path on Embedded Linux (V4L2, media graph, sensor init, lane config); stabilized streaming with \textbf{0 dropped frames} in 30-min soak.}
+  \resumeBullet{Containerized RAN managers (DM/AM/PFM) with \textbf{gRPC} interfaces; deployed on \textbf{Kubernetes}; integrated \textbf{Kafka} log streaming and probes for SLOs.}
+  \resumeBullet{Established Robot Framework + Jenkins test automation across multi-node rigs, increasing regression coverage from \textbf{$\sim$45\%} to \textbf{>80\%}.}
+\end{itemize}
+
+\textbf{Software Engineer} \hfill Nov 2018 -- Jan 2022 \\
+Capgemini, Gurgaon
+\begin{itemize}
+  \resumeBullet{Developed automotive embedded software using \textbf{AUTOSAR} architecture for instrument clusters; implemented telltale and door warning applications with Embedded C and Vector tools (CANalyzer, CANoe, DaVinci).}
+  \resumeBullet{Executed comprehensive testing strategy spanning Unit, Functional, Integration, and System levels; enhanced software reliability and compliance with automotive standards.}
+  \resumeBullet{Designed Smart-Grid Network Interface Card applications featuring \textbf{Over-The-Air (OTA)} updates and commissioning processes; improved field deployment efficiency by \textbf{25\%}.}
+  \resumeBullet{Maintained code quality and documentation using JIRA, DOORS, and Enterprise Architect; established coding standards that reduced integration defects by \textbf{40\%}.}
+\end{itemize}
+
+\textbf{IoT Support Engineer} \hfill Jan 2018 -- Aug 2018 \\
+BuffaloGrid Project Pvt Ltd, Delhi
+\begin{itemize}
+  \resumeBullet{Developed firmware for distributed solar-powered mobile charging hubs; implemented \textbf{FOTA updates} and Battery Management System (BMS) software for field-deployed units.}
+  \resumeBullet{Created test automation scripts reducing manual QA effort by \textbf{40\%}; enhanced product testing reliability and deployment validation.}
+\end{itemize}
+
+\textbf{Embedded Software Engineer} \hfill Dec 2015 -- Dec 2017 \\
+Eigen Technologies Pvt Ltd, Delhi
+\begin{itemize}
+  \resumeBullet{Led electronic design and firmware development for WSN-based smart streetlight and BLE-based home automation products; delivered end-to-end IoT solutions.}
+  \resumeBullet{Implemented multi-protocol firmware supporting 802.15.4 protocols including Zigbee; conducted comprehensive QA testing ensuring compatibility across devices.}
+  \resumeBullet{Architected and deployed IoT dashboard on AWS with real-time data visualization; integrated with 4G module gateway using AT commands for remote monitoring.}
+\end{itemize}
+
+% Selected Low-Level Systems Projects
+\section*{Selected Low-Level Systems Projects}
+\textbf{Yocto BSP for Custom Zynq Board} — Distro layers, U-Boot patches, kernel config, image recipes; reduced boot time via systemd unit profiling and init sequence trimming. 
+\newline
+\textbf{MIPI CSI-2 Camera Driver \& Pipeline} — Sensor init (I2C), CSI lane timing, V4L2 sub-dev, media controller graph; validated with long-run soak, artifact-free frames.
+\newline
+\textbf{PS-Side DMA/Interrupt Path} — Engineered robust DMA ring buffers and IRQ service; back-pressure handling to maintain deterministic throughput.
+\newline
+\textbf{RAN Microservices on K8s} — gRPC services (DM/AM/PFM), Kafka log bus, readiness/liveness probes; Helm deploys and blue/green updates.
+\newline
+\textbf{HW Bring-Up \& Debug} — Pinmux, clock tree, PMIC init; boundary scan + JTAG; logic analyzer traces for ISR latency verification.
+
+% Education
+\section*{Education}
+B.Tech in Electrical \& Electronics, GGSIPU (2014), Score 70.5\%
+
+\vfill
+\footnotesize Updated on: \today
+
+% ATS-KEYWORDS: Yocto, BSP, U-Boot, Embedded Linux, Linux device drivers, MIPI CSI-2, V4L2, Xilinx Zynq, PS, DMA, IRQ, I2C, SPI, GPIO, Robot Framework, Jenkins, Kafka, gRPC, Docker, Kubernetes, Cloud RAN, RTOS
+\end{document}

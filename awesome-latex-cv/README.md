@@ -1,4 +1,93 @@
-# Huajh Awesome Latex CV  
+# Embedded Systems LaTeX Resume
+
+This directory contains two versions of Anurag Tiwari's LaTeX resume, both optimized for embedded systems, low-level programming, and RAN development roles.
+
+## Files
+
+### Primary Resume (Recommended)
+- **`resume.tex`** - Clean, standalone LaTeX file optimized for embedded systems focus
+- **`resume.pdf`** - Compiled PDF output
+- Fully compatible with pdflatex
+- ATS-friendly with dense keyword coverage
+- Quantified achievements and metrics throughout
+
+### Classic Template (Advanced)
+- **`awesome-cv.tex`** - Based on awesome-cv template with embedded systems modifications
+- **`section_*.tex`** - Modular sections (headline, skills, experience, education)
+- **`awesome-source-cv.cls`** - Modified class file
+- Requires advanced LaTeX setup (may need font packages)
+
+## Key Features
+
+### Content Highlights
+- **Summary**: Principle-level embedded engineer with Yocto, Xilinx Zynq, drivers focus
+- **Skills**: 6 focused buckets (Low-Level & Drivers, Kernel & BSP/Yocto, Board Bring-Up, RAN & Cloud-Native, Tooling, Languages)
+- **Experience**: Quantified achievements at CommScope, Capgemini, BuffaloGrid, Eigen
+- **Projects**: 5 selected low-level systems projects
+- **ATS Optimization**: Hidden keyword comments for Applicant Tracking Systems
+
+### Technical Achievements Highlighted
+- 22% reduction in Yocto image build time
+- 30% reduction in bring-up defects  
+- 80% regression test coverage improvement
+- 0 dropped frames in MIPI camera streaming
+- 40% reduction in manual QA effort
+
+## Compilation
+
+### Simple Method (Recommended)
+```bash
+pdflatex resume.tex
+```
+
+### Advanced Template Method
+```bash
+# May require additional font packages
+pdflatex awesome-cv.tex
+# or
+xelatex awesome-cv.tex
+```
+
+## Customization
+
+The `resume.tex` file is self-contained and easy to modify:
+- Update contact information in the header
+- Modify the Summary section to match your background
+- Adjust Skills buckets based on your expertise
+- Update Experience with your quantified achievements
+- Customize Selected Projects based on your work
+
+## ATS Compatibility
+
+Both versions include:
+- Clean, professional formatting
+- Keyword-rich content for embedded systems roles
+- Quantified metrics and achievements
+- Hidden ATS keyword comments
+- Standard fonts and formatting
+
+## Dependencies
+
+### For resume.tex
+- Standard LaTeX distribution (texlive)
+- pdflatex compiler
+
+### For awesome-cv.tex
+- Full LaTeX distribution with font packages
+- May require fontawesome fonts
+- XeLaTeX or LuaLaTeX recommended
+
+## Size
+
+Both versions are optimized for:
+- ≤ 2 pages
+- A4/Letter paper compatibility
+- 0.6 inch margins
+- Professional typography and spacing
+
+---
+
+# Original Huajh Awesome Latex CV  
 
 + This is CV in English.
 

@@ -1,0 +1,17 @@
+## LaTeX build files
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+
+## Image conversions for previews (keep PDFs, exclude preview PNGs)
+*_preview*.png

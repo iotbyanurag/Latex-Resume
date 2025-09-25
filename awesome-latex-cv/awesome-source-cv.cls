@@ -49,13 +49,16 @@
 % Dependences
 %A Few Useful Packages
 
-\RequirePackage[utf8]{luainputenc}
-\RequirePackage{fontspec} 					                 % for loading fonts
+% Comment out problematic packages for pdflatex compatibility
+%\RequirePackage[utf8]{luainputenc}
+%\RequirePackage{fontspec} 					                 % for loading fonts
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
 \RequirePackage{url,parskip} 	    % other packages for formatting
 \RequirePackage[usenames,dvipsnames]{xcolor}
 \RequirePackage{fullpage}
 \RequirePackage[margin=1.5cm]{geometry}
-\RequirePackage{fontawesome}
+% \RequirePackage{fontawesome}  % Comment out to avoid font issues
 \RequirePackage{hyperref}\hypersetup{hidelinks}
 \RequirePackage{titlesec}
 \RequirePackage{array}
@@ -66,9 +69,14 @@
 \RequirePackage[skins]{tcolorbox}
 \RequirePackage{ragged2e}
 \usepackage{tabularx}
-\usepackage[french,english]{babel}
+\usepackage[english]{babel}
 
-\DeclareUnicodeCharacter{00E9}{\'{e}}
+% Define fallback symbols for FontAwesome icons
+\newcommand{\faCode}{\textbullet}
+\newcommand{\faMortarBoard}{\textbullet}
+\newcommand{\faListUl}{\textbullet}
+
+% \DeclareUnicodeCharacter{00E9}{\'{e}}  % Comment out for pdflatex compatibility
 % Define default accent colors
 \definecolor{basecolor}{HTML}{000066}       %BLUE
 

@@ -32,3 +32,13 @@ If you have any questions or suggestions, feel free to contact me at your-email@
 
 Thank you for checking out my resume!
 
+## Local Preview Server
+
+You can run a minimal Overleaf-style preview locally:
+
+1. Ensure LuaLaTeX is installed and available as `lualatex`.
+2. From the repo root, run `python preview_resume.py` (use `--skip-initial` if you do not want an automatic compile on start).
+3. Visit `http://127.0.0.1:8000/` to view the PDF, trigger recompiles, and download the latest build.
+4. The "Recompile" button re-runs `lualatex` for `awesome-cv.tex`; the compiler log appears inline to help debug errors.
+
+Use `CTRL+C` in the terminal to stop the server.

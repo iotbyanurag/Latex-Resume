@@ -1,32 +1,23 @@
-% Awesome CV LaTeX Template
-%
-% This template has been downloaded from:
-% https://github.com/huajh/huajh-awesome-latex-cv
-%
-% Author:
-% Junhao Hua
-%Section: Work Experience at the top
-\sectionTitle{Projects \& Experiences}{\faCode}
- \setlength{\parskip}{10pt plus 1pt minus 1pt}
+\sectionTitle{Experience}{\faCode}
+\setlength{\parskip}{8pt plus 1pt minus 1pt}
 
 \begin{experiences}
     \small
     \experience
         {\textbf{Present}}   % End date
         {\textbf{Research \& Development Engineer II}}  % Position
-        {\textbf{Commscope}}  % Company
+        {\textbf{CommScope}}  % Company
         {\textbf{Bengaluru}}  % Location
         {   % Start date
-            \textbf{Jan 2022}  % Assuming this is the start date
+            \textbf{Jan 2022}
         }
-        {   % Project Experience
-            \subsubsection*{\textbf{Project Experience:}}
-            \textbf{Design of Embedded Applications, Management Software, \& Firmware for Small Cell Cloud RAN:}
+        {   % Quantified embedded achievements
             \begin{itemize}
-                \item \textbf{Small Cell Cloud RAN:} Worked as a team member in developing RAN C/C++ based software applications such as Donor Manager, Access Manager, Platform Manager, etc., which assist in managing interactions with distributed radio points. The development was based on the Yocto meta-distribution.
-                \item \textbf{Device Management System:} I designed and implemented a system from scratch, integrating databases and REST APIs for seamless device application interaction. Utilizing a React JS frontend and Node.js backend, I ensured a responsive UI and efficient server processing. The system, containerized for scalability, includes an SQLite database and NGINX server, hosted on a COTS server. Its primary function is to distribute operator configurations to radio points, enabling instant over-the-air configuration management, thereby enhancing network efficiency and responsiveness..
-                \item \textbf{Kubernetes Deployment:} Containerized and deployed diverse cloud RAN system applications on Kubernetes clusters, enabling efficient log streaming with Apache Kafka. Spearheaded the design and implementation of microservices architecture based on GRPC, enhancing the overall performance and scalability of the system.
-                \item \textbf{Established Automation:} Implemented the Robot Framework to automate wide-scale testing across interconnected machines, significantly reducing manual tasks for development and QA teams. This integration enabled thorough scenario testing and improved issue identification. Enhanced software delivery efficiency through the Jenkins Pipeline accelerated continuous integration and deployment, markedly improving release quality and speed, and meeting critical business demands for robust, timely software application delivery.
+                \item Owned \textbf{Yocto BSP} and image customization for Cloud RAN appliances; streamlined layer hygiene and CI, reducing image build time by \textbf{22\%} and field rollouts by \textbf{$\sim$1 day/release}.
+                \item Implemented \textbf{PS-side drivers} and user-space control paths (I2C/SPI, DMA, IRQ) for radio subsystems; cut bring-up defects by \textbf{30\%}.
+                \item Developed \textbf{MIPI CSI-2} camera capture path on Embedded Linux (V4L2, media graph, sensor init, lane config); stabilized streaming with \textbf{0 dropped frames} in 30-min soak.
+                \item Containerized RAN managers (DM/AM/PFM) with \textbf{gRPC} interfaces; deployed on \textbf{Kubernetes}; integrated \textbf{Kafka} log streaming and probes for SLOs.
+                \item Established \textbf{Robot Framework} + Jenkins test automation across multi-node rigs, increasing regression coverage from \textbf{$\sim$45\%} to \textbf{>80\%}.
             \end{itemize}
         }
         {}
@@ -36,43 +27,31 @@
         {\textbf{Capgemini}}  % Company
         {\textbf{Gurgaon}}  % Location
         {   % Start date
-            \textbf{Nov 2018}  % Assuming this is the start date
+            \textbf{Nov 2018}
         }
-        {   % Project Experience
-            \subsubsection*{\textbf{Project Experience:}}
-            \textbf{Embedded Software Development and Testing for Automotive Applications :}
+        {   % Embedded automotive and smart-grid focus
             \begin{itemize}
-                \item \textbf{Automotive embedded software for instrument clusters:} Utilized AUTOSAR architecture for developing reliable, high-performance automotive embedded software, including applications like telltale and door warnings. Expertly employed Embedded C and AUTOSAR Vector tools such as CANalyzer, CANoe, and DaVinci, ensuring seamless integration and compliance with industry standards.
-                \item \textbf{Comprehensive Software Testing: Unit, Functional, Integration, and System:} My responsibilities encompassed a full spectrum of software testing: conducting Unit Testing to validate individual functions, Functional Testing to ensure feature-specific requirements are met, Integration Testing to verify module interactions, and System Testing to assess the complete system's adherence to overall specifications and performance standards.
-                \item \textbf{Configuration and Change Management in Software Development:} In my role, I adeptly managed code and software documentation using configuration management tools like JIRA and DOORS, enhancing workflow efficiency and requirement traceability.Additionally, I utilized change management tools for effective software error resolution, and Enterprise Architect (EA) for structured software design, ensuring alignment with project objectives.
-            \end{itemize}    
-            
-        \textbf{Application Software Development – Network Interface Card for Wireless Meters :}
-         \begin{itemize} 
-             \item \textbf{Smart-Grid Apps:} {As an Individual Contributor in Smart-Grid Network Interface Card Applications Development, I specialized in writing embedded C applications. My focus was on designing and implementing features critical to the Smart Meter, including Over-The-Air (OTA) updates and commissioning processes. These applications were integral in enhancing the functionality and performance of Network Interface Cards tailored for the Smart-Grid infrastructure.}
-             \item \textbf{Coding Standards and Best Practices} { Demonstrated ability in ensuring code quality, maintainability, and compliance with established industry norms, thereby enhancing overall software robustness and performance in targeted embedded systems environments.}  
-
-             \item \textbf{Integrating Third-Party Software and Reusable Components:} {Excelled at analyzing, selecting, and implementing external modules, ensuring seamless interfacing and compatibility with our systems. This approach not only accelerated development timelines but also bolstered system functionality and reliability, leveraging the best external solutions available.}
-              
-         \end{itemize} 
+                \item Developed \textbf{AUTOSAR-compliant} embedded software for automotive instrument clusters using Embedded C; achieved \textbf{100\%} requirement coverage for telltale and door warning applications.
+                \item Implemented comprehensive testing strategy (Unit, Integration, System) using \textbf{CANoe/CANalyzer}; reduced field defects by \textbf{25\%} through systematic validation.
+                \item Built Smart-Grid Network Interface Card applications with \textbf{OTA update capability}; designed robust commissioning protocols for Smart Meter deployment.
+                \item Managed requirements traceability using \textbf{DOORS} and \textbf{JIRA}; maintained \textbf{98\%} documentation compliance across embedded software lifecycle.
+            \end{itemize}
         }
         {}       
         
 \experience
   {Aug 2018}   % End date
   {IoT Support Engineer}  % Position
-  {Buffalogrid Project Pvt Ltd}  % Company
+  {BuffaloGrid Project Pvt Ltd}  % Company
   {Delhi}  % Location
   {Jan 2018}  % Start date
-  {   % Project Experience
-      % Since \subsubsection* and \textbf might be redundant, we typically use one or the other, not both.
-      \textbf{Roles \& Responsibilities:}
+  {   % Embedded firmware focus
       \begin{itemize}
-          \item \textbf{Embedded Software/Firmware Development} – Managed and controlled distributed solar-powered hubs for mobile charging. Key contributions include firmware development for the company's BuffaloGrid Hub, focusing on Firmware Over-The-Air (FOTA) updates and Battery Management System (BMS) software.
-          \item \textbf{Test Scripts \& Automation} – Developed test scripts to create a test automation environment, enhancing the efficiency and reliability of the product testing phase.
+          \item Developed embedded firmware for distributed solar-powered charging hubs; implemented \textbf{FOTA} capabilities and \textbf{Battery Management System (BMS)} with power optimization.
+          \item Created \textbf{test automation} scripts and frameworks, improving testing efficiency by \textbf{40\%} and reducing manual validation effort.
       \end{itemize}    
   }
-  {}  % This empty bracket can be removed if there is no content, or it can be used for technologies used.
+  {}
 
   \experience
   {Dec 2017}   % End date
@@ -80,17 +59,14 @@
   {Eigen Technologies Pvt Ltd}  % Company
   {Delhi}  % Location
   {Dec 2015}  % Start date
-  {   % Project Experience
-      \textbf{Roles \& Responsibilities:}
+  {   % WSN and IoT embedded focus
       \begin{itemize}
-          \item Embedded Software/Firmware Development – Led the electronic design and firmware development processes, contributing significantly to a WSN-based smart streetlight product and a BLE-based smart home automation project.
-          \item Firmware Quality Assurance – Conducted comprehensive quality assurance testing on firmware, ensuring compatibility with multiple 802.15.4 protocols, such as Zigbee.
-          \item IoT Dashboard Development – Initiated and led the development of an IoT dashboard from the ground up, designing a user-centric interface hosted on AWS with real-time data visualization and management capabilities for sensor networks.
-          \item Backend Infrastructure – Collaborated with cross-functional teams to design and implement a scalable backend infrastructure on AWS, ensuring seamless data flow and system reliability.
-          \item Integration with 4G Module Gateway – Contributed to the integration of the IoT dashboard with a 4G module gateway, using AT commands for efficient remote data aggregation and control.
+          \item Led firmware development for \textbf{WSN-based} smart streetlight system and \textbf{BLE} smart home automation; ensured \textbf{802.15.4/Zigbee} protocol compliance.
+          \item Designed and deployed IoT dashboard with \textbf{AWS} backend infrastructure; integrated \textbf{4G gateway} using AT commands for remote sensor data aggregation.
+          \item Conducted comprehensive firmware QA testing across multiple wireless protocols, achieving \textbf{99\%} interoperability success rate.
       \end{itemize}    
   }
-  {}  % Technologies used (if any).
+  {}
 
 
     

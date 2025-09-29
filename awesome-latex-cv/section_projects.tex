@@ -1,0 +1,17 @@
+\sectionTitle{Selected Low-Level Systems Projects}{\faCogs}
+
+\begin{flushleft}
+\textbf{Yocto BSP for Custom Zynq Board} — Distro layers, U-Boot patches, kernel config, image recipes; reduced boot time via systemd unit profiling and init sequence trimming.
+\vspace{0.3\baselineskip}
+
+\textbf{MIPI CSI-2 Camera Driver \& Pipeline} — Sensor init (I2C), CSI lane timing, V4L2 sub-dev, media controller graph; validated with long-run soak, artifact-free frames.
+\vspace{0.3\baselineskip}
+
+\textbf{PS-Side DMA/Interrupt Path} — Engineered robust DMA ring buffers and IRQ service; back-pressure handling to maintain deterministic throughput.
+\vspace{0.3\baselineskip}
+
+\textbf{RAN Microservices on K8s} — gRPC services (DM/AM/PFM), Kafka log bus, readiness/liveness probes; Helm deploys and blue/green updates.
+\vspace{0.3\baselineskip}
+
+\textbf{HW Bring-Up \& Debug} — Pinmux, clock tree, PMIC init; boundary scan + JTAG; logic analyzer traces for ISR latency verification.
+\end{flushleft}

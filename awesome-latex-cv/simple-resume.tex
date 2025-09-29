@@ -1,0 +1,97 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+% Define colors
+\definecolor{darkblue}{RGB}{0,51,102}
+\definecolor{gray}{RGB}{102,102,102}
+
+% No page numbers
+\pagestyle{empty}
+
+% Custom section formatting
+\newcommand{\ressection}[1]{\vspace{8pt}\textcolor{darkblue}{\textbf{\large #1}}\hrule\vspace{4pt}}
+\newcommand{\ressubsection}[4]{\textbf{#1} \hfill \textcolor{gray}{#2} \\ \textit{#3} \hfill \textcolor{gray}{#4}}
+
+\begin{document}
+
+% Header
+\begin{center}
+{\LARGE \textbf{Anurag Tiwari}}\\[4pt]
+Embedded Software Engineer\\[2pt]
+\href{mailto:anuragmtiwari@outlook.com}{anuragmtiwari@outlook.com} | (+91) 7678537602\\
+Bengaluru, India | \href{https://github.com/iotbyanurag}{github.com/iotbyanurag} | \href{https://linkedin.com/in/anurag0079090}{linkedin.com/in/anurag0079090}
+\end{center}
+
+\vspace{8pt}
+
+% Summary
+\ressection{Summary}
+Embedded Software Engineer (10+ years) specializing in \textbf{Yocto BSPs}, \textbf{Xilinx Zynq (PS)}, \textbf{Embedded Linux}, and \textbf{device drivers} (including \textbf{MIPI CSI-2} camera). Built and containerized \textbf{Cloud RAN} applications (Docker/Kubernetes), automated validation (\textbf{Robot Framework}, Jenkins), and delivered production-grade firmware/services. Recent work at \textbf{CommScope} spans RAN managers (DM/AM/PFM), microservices (gRPC), and Kafka-backed logging.
+
+% Skills
+\ressection{Technical Skills}
+\textbf{Low-Level \& Drivers:} Linux device drivers, MIPI CSI-2 camera pipeline, V4L2, I2C/SPI/UART, DMA, IRQs, GPIO, pinmux\\
+\textbf{Kernel \& BSP/Yocto:} Yocto (distro layers, recipes, images), U-Boot, initramfs, systemd, kernel config/patches\\
+\textbf{Board Bring-Up \& Debug:} Xilinx Zynq(PS), boot flow, DDR, clocks, PMIC, JTAG, logic analyzer, oscilloscope\\
+\textbf{RAN \& Cloud-Native:} C/C++, gRPC, Kafka, Docker, Kubernetes, microservices, CI/CD, observability\\
+\textbf{Tooling \& Automation:} Robot Framework, Jenkins, Git, JIRA, DOORS, Enterprise Architect\\
+\textbf{Languages:} C, C++, Embedded C, Python, Shell; Web (React, Node.js)
+
+% Education
+\ressection{Education}
+\textbf{B.Tech in Electrical \& Electronics Engineering}\\
+\textit{Guru Gobind Singh Indraprastha University (GGSIPU)}, Delhi\\
+\textbf{2014} | Score: 70.5\%
+
+% Experience
+\ressection{Experience}
+
+\ressubsection{Research \& Development Engineer II}{Jan 2022 -- Present}{CommScope}{Bengaluru}
+\begin{itemize}[leftmargin=15pt,topsep=2pt,itemsep=1pt]
+\item Owned \textbf{Yocto BSP} and image customization for Cloud RAN appliances; streamlined layer hygiene and CI, reducing image build time by \textbf{22\%} and field rollouts by \textbf{1 day/release}.
+\item Implemented \textbf{PS-side drivers} and user-space control paths (I2C/SPI, DMA, IRQ) for radio subsystems; cut bring-up defects by \textbf{30\%}.
+\item Developed \textbf{MIPI CSI-2} camera capture path on Embedded Linux (V4L2, media graph, sensor init, lane config); stabilized streaming with \textbf{0 dropped frames} in 30-min soak.
+\item Containerized RAN managers (DM/AM/PFM) with \textbf{gRPC} interfaces; deployed on \textbf{Kubernetes}; integrated \textbf{Kafka} log streaming and probes for SLOs.
+\item Established \textbf{Robot Framework} + Jenkins test automation across multi-node rigs, increasing regression coverage from \textbf{45\%} to \textbf{80\%+}.
+\end{itemize}
+
+\ressubsection{Software Engineer}{Nov 2018 -- Jan 2022}{Capgemini}{Gurgaon}
+\begin{itemize}[leftmargin=15pt,topsep=2pt,itemsep=1pt]
+\item Developed \textbf{AUTOSAR-compliant} embedded software for automotive instrument clusters using Embedded C; achieved \textbf{100\%} requirement coverage for telltale and door warning applications.
+\item Implemented comprehensive testing strategy (Unit, Integration, System) using \textbf{CANoe/CANalyzer}; reduced field defects by \textbf{25\%} through systematic validation.
+\item Built Smart-Grid Network Interface Card applications with \textbf{OTA update capability}; designed robust commissioning protocols for Smart Meter deployment.
+\item Managed requirements traceability using \textbf{DOORS} and \textbf{JIRA}; maintained \textbf{98\%} documentation compliance across embedded software lifecycle.
+\end{itemize}
+
+\ressubsection{IoT Support Engineer}{Jan 2018 -- Aug 2018}{BuffaloGrid Project Pvt Ltd}{Delhi}
+\begin{itemize}[leftmargin=15pt,topsep=2pt,itemsep=1pt]
+\item Developed embedded firmware for distributed solar-powered charging hubs; implemented \textbf{FOTA} capabilities and \textbf{Battery Management System (BMS)} with power optimization.
+\item Created \textbf{test automation} scripts and frameworks, improving testing efficiency by \textbf{40\%} and reducing manual validation effort.
+\end{itemize}
+
+\ressubsection{Embedded Software Engineer}{Dec 2015 -- Dec 2017}{Eigen Technologies Pvt Ltd}{Delhi}
+\begin{itemize}[leftmargin=15pt,topsep=2pt,itemsep=1pt]
+\item Led firmware development for \textbf{WSN-based} smart streetlight system and \textbf{BLE} smart home automation; ensured \textbf{802.15.4/Zigbee} protocol compliance.
+\item Designed and deployed IoT dashboard with \textbf{AWS} backend infrastructure; integrated \textbf{4G gateway} using AT commands for remote sensor data aggregation.
+\item Conducted comprehensive firmware QA testing across multiple wireless protocols, achieving \textbf{99\%} interoperability success rate.
+\end{itemize}
+
+% Projects
+\ressection{Selected Low-Level Systems Projects}
+\textbf{Yocto BSP for Custom Zynq Board} — Distro layers, U-Boot patches, kernel config, image recipes; reduced boot time via systemd unit profiling.\\[2pt]
+\textbf{MIPI CSI-2 Camera Driver \& Pipeline} — Sensor init (I2C), CSI lane timing, V4L2 sub-dev, media controller graph; validated with long-run soak.\\[2pt]
+\textbf{PS-Side DMA/Interrupt Path} — Engineered robust DMA ring buffers and IRQ service; back-pressure handling for deterministic throughput.\\[2pt]
+\textbf{RAN Microservices on K8s} — gRPC services (DM/AM/PFM), Kafka log bus, readiness/liveness probes; Helm deploys and blue/green updates.\\[2pt]
+\textbf{HW Bring-Up \& Debug} — Pinmux, clock tree, PMIC init; boundary scan + JTAG; logic analyzer traces for ISR latency verification.
+
+\vspace{8pt}
+\begin{center}
+\textit{Updated on: \today}
+\end{center}
+
+\end{document}

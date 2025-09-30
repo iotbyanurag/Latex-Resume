@@ -1,0 +1,14 @@
+node_modules
+**/node_modules
+**/.next
+.git
+.gitignore
+dist
+*.log
+data/runs/*
+!.gitkeep
+__pycache__
+*.aux
+*.out
+*.log
+*.pdf

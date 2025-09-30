@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  dashboard:
+    build: 
+      context: ./dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "80:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_ORCHESTRATOR_URL=http://localhost:4000
+    depends_on:
+      - orchestrator
+    restart: unless-stopped
+
+  orchestrator:
+    build:
+      context: .
+      dockerfile: orchestrator/Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - TEXLIVE_URL=http://texlive:5001/build
+    volumes:
+      - ./resume:/workspace/resume:ro
+      - ./data:/workspace/data
+      - ./scripts:/workspace/scripts:ro
+    depends_on:
+      - texlive
+    restart: unless-stopped
+
+  texlive:
+    build:
+      context: ./texlive
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./resume:/workspace/resume:ro
+      - ./data:/workspace/data
+    restart: unless-stopped
+
+  # Optional: Add a reverse proxy
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - dashboard
+    restart: unless-stopped

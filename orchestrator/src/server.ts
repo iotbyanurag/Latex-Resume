@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 // NodeNext/ESM requires explicit .js extensions for local relative imports
-import { ResumeRunRouter } from '../../agents/router.ts';
+import { ResumeRunRouter } from '../../agents/router.js';
 
 const app = express();
 const router = new ResumeRunRouter();

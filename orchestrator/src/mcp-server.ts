@@ -1,10 +1,20 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
-import { ResumeRunRouter } from '../../agents/router.ts';
-import { runConfigSchema } from '../../agents/schemas.ts';
 
-const router = new ResumeRunRouter();
+// Dynamic imports to avoid module resolution issues
+let ResumeRunRouter: any;
+let runConfigSchema: any;
+let router: any;
+
+async function loadModules() {
+  const routerModule = await import('../../agents/router.ts');
+  const schemasModule = await import('../../agents/schemas.ts');
+  
+  ResumeRunRouter = routerModule.default;
+  runConfigSchema = schemasModule.runConfigSchema;
+  router = new ResumeRunRouter();
+}
 
 const server = new McpServer({
   name: 'resume-orchestrator',
@@ -22,7 +32,17 @@ const getRunInputSchema = z.object({
   runId: z.string()
 });
 
-const createRunInputSchema = runConfigSchema;
+const createRunInputSchema = z.object({
+  jobDescription: z.string(),
+  dryRun: z.boolean(),
+  providers: z.object({
+    reviewer: z.enum(['groq', 'claude', 'gemini']),
+    swot: z.enum(['groq', 'claude', 'gemini']),
+    refiner: z.enum(['groq', 'claude', 'gemini']),
+    judge: z.enum(['groq', 'claude', 'gemini']),
+    finalizer: z.enum(['groq', 'claude', 'gemini'])
+  })
+});
 
 server.registerTool(
   'list-runs',
@@ -35,7 +55,7 @@ server.registerTool(
     let filtered = runs;
 
     if (args.status) {
-      filtered = filtered.filter((run) => run.status === args.status);
+      filtered = filtered.filter((run: any) => run.status === args.status);
     }
 
     if (typeof args.limit === 'number') {
@@ -99,21 +119,27 @@ server.registerTool(
   }
 );
 
-const transport = new StdioServerTransport();
-await server.connect(transport);
+async function startServer() {
+  await loadModules();
+  
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
 
-console.error('Resume MCP server ready (stdio).');
+  console.error('Resume MCP server ready (stdio).');
 
-const shutdown = async (signal: string) => {
-  console.error(`Received ${signal}, shutting down MCP server.`);
-  await server.close();
-  process.exit(0);
-};
+  const shutdown = async (signal: string) => {
+    console.error(`Received ${signal}, shutting down MCP server.`);
+    await server.close();
+    process.exit(0);
+  };
 
-process.on('SIGINT', () => {
-  void shutdown('SIGINT');
-});
+  process.on('SIGINT', () => {
+    void shutdown('SIGINT');
+  });
 
-process.on('SIGTERM', () => {
-  void shutdown('SIGTERM');
-});
+  process.on('SIGTERM', () => {
+    void shutdown('SIGTERM');
+  });
+}
+
+startServer().catch(console.error);

@@ -145,3 +145,5 @@ export const runSummarySchema = z.object({
   diffSummary: z.string().nullable().optional()
 });
 
+export type RunSummary = z.infer<typeof runSummarySchema>;
+

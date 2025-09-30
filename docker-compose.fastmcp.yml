@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # FastMCP Server
+  mcp-server:
+    build: 
+      context: ./mcp-server
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"  # HTTP/SSE transport
+    environment:
+      - NODE_ENV=production
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    volumes:
+      - ./resume:/app/resume:ro
+      - ./data:/app/data
+    command: ["python", "server-direct.py", "--transport", "http", "--port", "8000"]
+    restart: unless-stopped
+
+  # Dashboard (optional - can use FastMCP directly)
+  dashboard:
+    build: 
+      context: ./dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_MCP_URL=http://mcp-server:8000
+    depends_on:
+      - mcp-server
+    restart: unless-stopped
+
+  # Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx-fastmcp.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - mcp-server
+      - dashboard
+    restart: unless-stopped

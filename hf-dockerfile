@@ -1,0 +1,92 @@
+# Hugging Face Spaces Deployment - Monolithic Container
+FROM node:18-alpine
+
+# Install system dependencies
+RUN apk add --no-cache \
+    texlive-full \
+    python3 \
+    py3-pip \
+    curl \
+    bash
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY dashboard/package*.json ./dashboard/
+COPY orchestrator/package*.json ./orchestrator/
+COPY texlive/package*.json ./texlive/
+
+# Install dependencies
+RUN cd dashboard && npm ci --only=production
+RUN cd orchestrator && npm ci --only=production
+RUN cd texlive && npm ci --only=production
+
+# Copy source code
+COPY dashboard/ ./dashboard/
+COPY orchestrator/ ./orchestrator/
+COPY texlive/ ./texlive/
+COPY agents/ ./agents/
+COPY resume/ ./resume/
+COPY scripts/ ./scripts/
+
+# Build applications
+RUN cd dashboard && npm run build
+RUN cd orchestrator && npm run build
+
+# Create data directory
+RUN mkdir -p data/runs
+
+# Create startup script
+RUN cat > start.sh << 'EOF'
+#!/bin/bash
+set -e
+
+# Start TeXLive service in background
+cd /app/texlive && npm start &
+TEXLIVE_PID=$!
+
+# Wait for TeXLive to start
+sleep 5
+
+# Start Orchestrator service in background
+cd /app/orchestrator && npm start &
+ORCHESTRATOR_PID=$!
+
+# Wait for Orchestrator to start
+sleep 5
+
+# Start Dashboard (main service)
+cd /app/dashboard && npm start
+
+# Cleanup function
+cleanup() {
+    echo "Shutting down services..."
+    kill $TEXLIVE_PID $ORCHESTRATOR_PID 2>/dev/null || true
+    exit 0
+}
+
+# Set up signal handlers
+trap cleanup SIGTERM SIGINT
+
+# Wait for any process to exit
+wait
+EOF
+
+RUN chmod +x start.sh
+
+# Expose port (Hugging Face Spaces uses port 7860)
+EXPOSE 7860
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=7860
+ENV TEXLIVE_URL=http://localhost:5001/build
+ENV NEXT_PUBLIC_ORCHESTRATOR_URL=http://localhost:4000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:7860 || exit 1
+
+# Start all services
+CMD ["./start.sh"]

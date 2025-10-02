@@ -1,0 +1,4 @@
+# Heroku Procfile - Multiple Services
+web: cd dashboard && npm start
+orchestrator: cd orchestrator && npm start
+texlive: cd texlive && npm start

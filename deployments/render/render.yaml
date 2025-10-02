@@ -1,0 +1,41 @@
+# Render.com Deployment Configuration
+services:
+  - type: web
+    name: resume-dashboard
+    env: node
+    plan: starter
+    buildCommand: cd dashboard && npm ci && npm run build
+    startCommand: cd dashboard && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_ORCHESTRATOR_URL
+        value: https://resume-orchestrator.onrender.com
+      - key: PORT
+        value: 10000
+
+  - type: web
+    name: resume-orchestrator
+    env: node
+    plan: starter
+    buildCommand: cd orchestrator && npm ci && npm run build
+    startCommand: cd orchestrator && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TEXLIVE_URL
+        value: https://resume-texlive.onrender.com/build
+      - key: PORT
+        value: 10000
+
+  - type: web
+    name: resume-texlive
+    env: node
+    plan: starter
+    buildCommand: cd texlive && npm ci
+    startCommand: cd texlive && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000

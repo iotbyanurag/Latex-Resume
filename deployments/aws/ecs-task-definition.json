@@ -1,0 +1,91 @@
+{
+  "family": "resume-orchestrator",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::ACCOUNT:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::ACCOUNT:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "dashboard",
+      "image": "ACCOUNT.dkr.ecr.REGION.amazonaws.com/resume-dashboard:latest",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "NEXT_PUBLIC_ORCHESTRATOR_URL",
+          "value": "http://orchestrator:4000"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/resume-orchestrator",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "dashboard"
+        }
+      }
+    },
+    {
+      "name": "orchestrator",
+      "image": "ACCOUNT.dkr.ecr.REGION.amazonaws.com/resume-orchestrator:latest",
+      "portMappings": [
+        {
+          "containerPort": 4000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "TEXLIVE_URL",
+          "value": "http://texlive:5001/build"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/resume-orchestrator",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "orchestrator"
+        }
+      }
+    },
+    {
+      "name": "texlive",
+      "image": "ACCOUNT.dkr.ecr.REGION.amazonaws.com/resume-texlive:latest",
+      "portMappings": [
+        {
+          "containerPort": 5001,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/resume-orchestrator",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "texlive"
+        }
+      }
+    }
+  ]
+}

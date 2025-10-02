@@ -1,0 +1,46 @@
+# Railway-specific Docker Compose configuration
+version: '3.8'
+
+services:
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_ORCHESTRATOR_URL=http://orchestrator:4000
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - orchestrator
+
+  orchestrator:
+    build:
+      context: .
+      dockerfile: orchestrator/Dockerfile
+    environment:
+      - NODE_ENV=production
+      - TEXLIVE_URL=http://texlive:5001/build
+      - PORT=4000
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./resume:/workspace/resume:ro
+      - ./data:/workspace/data
+      - ./scripts:/workspace/scripts:ro
+    depends_on:
+      - texlive
+
+  texlive:
+    build:
+      context: ./texlive
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=5001
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./resume:/workspace/resume:ro
+      - ./data:/workspace/data

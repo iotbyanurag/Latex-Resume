@@ -1,0 +1,134 @@
+# Kubernetes Deployment Configuration
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-dashboard
+  labels:
+    app: resume-dashboard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: resume-dashboard
+  template:
+    metadata:
+      labels:
+        app: resume-dashboard
+    spec:
+      containers:
+      - name: dashboard
+        image: resume-dashboard:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: NEXT_PUBLIC_ORCHESTRATOR_URL
+          value: "http://resume-orchestrator-service:4000"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resume-dashboard-service
+spec:
+  selector:
+    app: resume-dashboard
+  ports:
+  - port: 3000
+    targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-orchestrator
+  labels:
+    app: resume-orchestrator
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: resume-orchestrator
+  template:
+    metadata:
+      labels:
+        app: resume-orchestrator
+    spec:
+      containers:
+      - name: orchestrator
+        image: resume-orchestrator:latest
+        ports:
+        - containerPort: 4000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: TEXLIVE_URL
+          value: "http://resume-texlive-service:5001/build"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resume-orchestrator-service
+spec:
+  selector:
+    app: resume-orchestrator
+  ports:
+  - port: 4000
+    targetPort: 4000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-texlive
+  labels:
+    app: resume-texlive
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resume-texlive
+  template:
+    metadata:
+      labels:
+        app: resume-texlive
+    spec:
+      containers:
+      - name: texlive
+        image: resume-texlive:latest
+        ports:
+        - containerPort: 5001
+        env:
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resume-texlive-service
+spec:
+  selector:
+    app: resume-texlive
+  ports:
+  - port: 5001
+    targetPort: 5001

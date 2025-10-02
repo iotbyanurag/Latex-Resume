@@ -1,0 +1,38 @@
+# Railway-specific Dockerfile for multi-service deployment
+FROM node:18-alpine
+
+# Install system dependencies
+RUN apk add --no-cache \
+    texlive-full \
+    python3 \
+    py3-pip \
+    curl \
+    bash \
+    docker-compose
+
+# Set working directory
+WORKDIR /app
+
+# Copy all project files
+COPY . .
+
+# Install dependencies for all services
+RUN cd dashboard && npm ci --only=production
+RUN cd orchestrator && npm ci --only=production
+RUN cd texlive && npm ci --only=production
+
+# Build applications
+RUN cd dashboard && npm run build
+RUN cd orchestrator && npm run build
+
+# Create data directory
+RUN mkdir -p data/runs
+
+# Set permissions
+RUN chmod +x scripts/build-resume.sh
+
+# Expose ports
+EXPOSE 3000 4000 5001
+
+# Start all services using docker-compose
+CMD ["docker-compose", "-f", "railway-compose.yml", "up"]

@@ -1,0 +1,48 @@
+{
+  "name": "AI Resume Orchestrator",
+  "description": "State-of-the-art multi-agent system for intelligent resume optimization",
+  "repository": "https://github.com/your-username/Latex-Resume",
+  "logo": "https://raw.githubusercontent.com/your-username/Latex-Resume/main/resume/anurag.png",
+  "keywords": ["ai", "resume", "optimization", "multi-agent", "latex"],
+  "stack": "container",
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    },
+    "orchestrator": {
+      "quantity": 1,
+      "size": "basic"
+    },
+    "texlive": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:mini"
+    }
+  ],
+  "env": {
+    "NODE_ENV": {
+      "description": "Node.js environment",
+      "value": "production"
+    },
+    "GROQ_API_KEY": {
+      "description": "Groq API key for LLM access",
+      "required": true
+    },
+    "ANTHROPIC_API_KEY": {
+      "description": "Anthropic Claude API key",
+      "required": true
+    },
+    "GOOGLE_API_KEY": {
+      "description": "Google Gemini API key",
+      "required": true
+    }
+  },
+  "scripts": {
+    "postdeploy": "npm install && npm run build"
+  }
+}

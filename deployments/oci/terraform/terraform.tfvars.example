@@ -1,0 +1,12 @@
+# OCI Terraform Variables Example
+# Copy this file to terraform.tfvars and fill in your values
+
+region = "us-ashburn-1"
+compartment_id = "ocid1.compartment.oc1..your-compartment-id"
+ssh_public_key = "ssh-rsa AAAAB3NzaC1yc2E... your-ssh-public-key"
+
+# Optional overrides
+github_repo = "https://github.com/your-username/Latex-Resume.git"
+instance_shape = "VM.Standard.E4.Flex"
+ocpu_count = 2
+memory_in_gbs = 8

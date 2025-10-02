@@ -1,0 +1,76 @@
+# OCI Container Instance Configuration
+apiVersion: core.oci.oraclecloud.com/v1alpha1
+kind: ContainerInstance
+metadata:
+  name: resume-orchestrator
+  namespace: default
+spec:
+  containers:
+  - name: dashboard
+    image: your-region.ocir.io/your-namespace/resume-dashboard:latest
+    ports:
+    - containerPort: 3000
+      protocol: TCP
+    env:
+    - name: NODE_ENV
+      value: "production"
+    - name: NEXT_PUBLIC_ORCHESTRATOR_URL
+      value: "http://orchestrator:4000"
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "500m"
+      limits:
+        memory: "1Gi"
+        cpu: "1000m"
+  
+  - name: orchestrator
+    image: your-region.ocir.io/your-namespace/resume-orchestrator:latest
+    ports:
+    - containerPort: 4000
+      protocol: TCP
+    env:
+    - name: NODE_ENV
+      value: "production"
+    - name: TEXLIVE_URL
+      value: "http://texlive:5001/build"
+    - name: GROQ_API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: api-keys
+          key: groq-key
+    - name: ANTHROPIC_API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: api-keys
+          key: claude-key
+    - name: GOOGLE_API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: api-keys
+          key: google-key
+    resources:
+      requests:
+        memory: "1Gi"
+        cpu: "1000m"
+      limits:
+        memory: "2Gi"
+        cpu: "2000m"
+  
+  - name: texlive
+    image: your-region.ocir.io/your-namespace/resume-texlive:latest
+    ports:
+    - containerPort: 5001
+      protocol: TCP
+    env:
+    - name: NODE_ENV
+      value: "production"
+    resources:
+      requests:
+        memory: "2Gi"
+        cpu: "1000m"
+      limits:
+        memory: "4Gi"
+        cpu: "2000m"
+  
+  restartPolicy: Always

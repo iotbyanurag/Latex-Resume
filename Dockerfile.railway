@@ -17,9 +17,10 @@ WORKDIR /app
 COPY . .
 
 # Install dependencies for all services
-RUN cd dashboard && npm ci --only=production
-RUN cd orchestrator && npm ci --only=production
-RUN cd texlive && npm ci --only=production
+# Generate package-lock.json files first, then use npm ci for faster builds
+RUN cd dashboard && npm install
+RUN cd orchestrator && npm install  
+RUN cd texlive && npm install
 
 # Build applications
 RUN cd dashboard && npm run build
